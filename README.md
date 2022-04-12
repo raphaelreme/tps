@@ -9,7 +9,7 @@ Implementation of Thin Plate Spline.
 ### Pip
 
 ```bash
-$ pip install tps
+$ pip install thin-plate-spline
 ```
 
 ### Conda
@@ -38,6 +38,8 @@ tps.fit(X_c, X_t)
 # Transform new points
 Y = tps.transform(X)
 ```
+
+Also have a look at `example.py`
 
 
 ## Build and Deploy
