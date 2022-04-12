@@ -1,0 +1,6 @@
+-e .
+black
+matplotlib
+mypy
+pylint
+tqdm
