@@ -1,6 +1,8 @@
 -e .
 black
+build
 matplotlib
 mypy
 pylint
 tqdm
+twine
