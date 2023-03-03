@@ -1,5 +1,8 @@
 # tps
 
+[![Lint and Test](https://github.com/raphaelreme/tps/actions/workflows/tests.yml/badge.svg)](https://github.com/raphaelreme/tps/actions/workflows/tests.yml)
+
+
 Implementation of Thin Plate Spline.
 (For a faster implementation in torch, look at tps-torch)
 
