@@ -102,7 +102,7 @@ class ThinPlateSpline:
             ndarray: Mapped point in the target space
                 Shape: (n, d_t)
         """
-        assert self._fitted
+        assert self._fitted, "Please call fit first."
 
         X = _ensure_2d(X)
         assert X.shape[1] == self.control_points.shape[1]
@@ -130,11 +130,18 @@ class ThinPlateSpline:
         return dist**2 * np.log(dist)
 
 
-def _ensure_2d(arr: np.ndarray) -> np.ndarray:
-    """Ensure that we manipulate a 2d array"""
-    arr = np.atleast_2d(arr)  # Should we encourage this ?
-    assert arr.ndim == 2
-    return arr
+def _ensure_2d(array: np.ndarray) -> np.ndarray:
+    """Ensure that array is a 2d array
+
+    In case of 1d array, let's expand the last dim
+    """
+    assert array.ndim in (1, 2)
+
+    # Expand last dim in order to interpret this as (n, 1) points
+    if array.ndim == 1:
+        array = array[:, None]
+
+    return array
 
 
 # Much slower than scipy...
