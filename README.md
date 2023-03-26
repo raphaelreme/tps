@@ -4,7 +4,7 @@
 
 
 Implementation of Thin Plate Spline.
-(For a faster implementation in torch, look at [tps-torch](https://github.com/raphaelreme/torch-tps))
+(For a faster implementation in torch, look at [torch-tps](https://github.com/raphaelreme/torch-tps))
 
 
 ## Install
@@ -54,10 +54,6 @@ The elastic deformation of TPS can be used for image warping. Here is an example
 ![Input Image](example/images/dog_with_bbox.png)![Increased Image](example/images/increase_warped_dog.png)![Decreased Image](example/images/decrease_warped_dog.png)![Warped Image](example/images/random_warped_dog.png)
 
 Have a look at `example/image_warping.py`.
-
-
-
-
 
 
 ## Build and Deploy

@@ -122,6 +122,7 @@ def main():
     # Transform it into the input indices
     input_indices = tps.transform(output_indices.reshape(-1, 2)).reshape(height, width, 2)
 
+    # Interpolate the resulting image
     warped = np.concatenate(
         [
             scipy.ndimage.map_coordinates(np.array(image)[..., channel], input_indices.transpose(2, 0, 1))[..., None]
