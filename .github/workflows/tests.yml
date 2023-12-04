@@ -6,6 +6,8 @@ on:
     branches:
       - "**"
   workflow_call:
+  schedule:
+    - cron:  '45 14 10 * *'  # Program linting every 10th of each month at 14:45
 
 jobs:
   main:
