@@ -23,8 +23,7 @@ Not yet available
 ## Getting started
 
 ```python
-
-import numpy 
+import numpy as np
 from tps import ThinPlateSpline
 
 # Some data
