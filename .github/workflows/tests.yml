@@ -14,8 +14,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-13, windows-latest]  # let's build on mac 13 while the issue is being resolved
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+        exclude:  # Python < v3.8 does not support Apple Silicon ARM64.
+          - python-version: "3.7"
+            os: macos-latest
+        include:  # So run those legacy versions on Intel CPUs.
+          - python-version: "3.7"
+            os: macos-13
 
     steps:
       - name: Set git to use LF
