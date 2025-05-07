@@ -1,13 +1,18 @@
-# tps
+# Thin Plate Spline (TPS)
 
 [![Lint and Test](https://github.com/raphaelreme/tps/actions/workflows/tests.yml/badge.svg)](https://github.com/raphaelreme/tps/actions/workflows/tests.yml)
 
+Python (NumPy & SciPy) implementation of the generalized Polyharmonic Spline interpolation (also known as Thin Plate Spline in 2D). It learns a smooth elastic mapping between two Euclidean spaces with support for:
 
-Implementation of Thin Plate Spline.
-(For a faster implementation in torch, look at [torch-tps](https://github.com/raphaelreme/torch-tps))
+- Arbitrary input and output dimensions
+- Arbitrary spline order `k`
+- Optional regularization
 
+Useful for interpolation, deformation fields, and smooth non-linear regression.
 
-## Install
+For a faster implementation in PyTorch, see [torch-tps](https://github.com/raphaelreme/torch-tps).
+
+## 🚀 Install
 
 ### Pip
 
@@ -15,49 +20,112 @@ Implementation of Thin Plate Spline.
 $ pip install thin-plate-spline
 ```
 
-### Conda
-
-Not yet available
-
-
 ## Getting started
 
 ```python
 import numpy as np
 from tps import ThinPlateSpline
 
-# Some data
-X_c = np.random.normal(0, 1, (800, 3))
-X_t = np.random.normal(0, 2, (800, 2))
-X = np.random.normal(0, 1, (300, 3))
+# Control points
+X_train = np.random.normal(0, 1, (800, 3))  # 800 points in R^3
+Y_train = np.random.normal(0, 1, (800, 2))  # Values for each point (800 values in R^2)
 
-# Create the tps object
-tps = ThinPlateSpline(alpha=0.0)  # 0 Regularization
+# New source points to interpolate
+X_test = np.random.normal(0, 1, (300 0, 3))
 
-# Fit the control and target points
-tps.fit(X_c, X_t)
+# Initialize spline model (Regularization is controled with alpha parameter)
+tps = ThinPlateSpline(alpha=0.5)
 
-# Transform new points
-Y = tps.transform(X)
+# Fit spline from control points
+tps.fit(X_train, Y_train)
+
+# Interpolate new points
+Y_test = tps.transform(X_test)
 ```
 
 ## Examples
 
-We provide different examples in the `example` folder. (From interpolation, to multidimensional cases and image warping).
+See the `example/` folder for scripts showing:
+
+- Interpolation in 1D, 2D, 3D
+- Arbitrary input and output dimensions
+- Image warping with elastic deformation
+
+### Image Warping
+
+Example of increasing/decreasing/randomly deforming a dog's face using sparse control points.
+
+![Original](example/images/dog_with_bbox.png)
+![Increased](example/images/increase_warped_dog.png)
+![Decreased](example/images/decrease_warped_dog.png)
+![Random](example/images/random_warped_dog.png)
+
+Code: `example/image_warping.py`
 
 
-### Image warping
+## 🧠 Theory Summary
 
-The elastic deformation of TPS can be used for image warping. Here is an example of tps to increase/decrease the size of the center of the image or using random control points:
+The model solves the regularized interpolation problem:
 
-![Input Image](example/images/dog_with_bbox.png)![Increased Image](example/images/increase_warped_dog.png)![Decreased Image](example/images/decrease_warped_dog.png)![Warped Image](example/images/random_warped_dog.png)
+$$
+min_f \sum_{i=1}^n (y_i - f(x_i))^2 +  \int \|\nabla^{\text{order}} f\|_2^2 dx
+$$
 
-Have a look at `example/image_warping.py`.
+With solution:
+
+$$
+f(x) = P(x) +  \sum_{i=1}^n w_i G(\|x - x_i\|_2)
+$$
+
+Where:
+
+- G(r): radial basis function (RBF) (depends on `order` and the input dimension `d`)
+- P(x): a polynomial of degree `order - 1`
+
+Default kernel (TPS):
+$$G(r) = r^2 \log(r)$$
+
+General kernel:
+$$
+\begin{aligned} &G(r) = r^{(2 \text{order} - d)} & \text{ if d is odd}\\ &G(r) = r^{(2\text{order} - d)} \log(r) & \text{ otherwise}\end{aligned}
+$$
 
 
-## Build and Deploy
+## 🔧 API
+
+### `ThinPlateSpline(alpha=0.0, order=2, enforce_tps_kernel=False)`
+
+Creates a general polyharmonic spline interpolator (Default to TPS in 2D and natural cubic splines in 1D).
+
+- **alpha** *(float)*: Regularization strength (default 0.0)
+- **order** *(int)*: Spline order (default is 2 for TPS)
+- **enforce_tps_kernel** *(bool)*: Force TPS kernel r^2 log r, even when mathematically suboptimal
+
+### `.fit(X, Y)`
+
+Fits the model to control point pairs.
+
+- **X**: `(n, d)` input coordinates
+- **Y**: `(n, v)` target coordinates
+
+Returns: `self`
+
+### `.transform(X)`
+
+Applies the learned mapping to new input points.
+
+- **X**: `(n', d)` points
+
+Returns: `(n', v)` interpolated values
+
+## Development
 
 ```bash
-$ python -m build
-$ python -m twine upload dist/*
+git clone https://github.com/raphaelreme/tps.git
+cd tps
+pip install -e .
 ```
+
+## License
+
+MIT License

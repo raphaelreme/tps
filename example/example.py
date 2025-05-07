@@ -20,25 +20,25 @@ def compute_time(f, n, *args, **kwargs):
 def main_timed():
     """Check time execution
 
-    (Also shows d_s != d_t)
+    Also shows d_s != d_t and the usage of float32 to speed up computations.
     """
-    d_s = 3
-    d_t = 2
-    n_c = 800
-    n = 800
+    d = 3
+    v = 2
+    n = 1500
+    m = 5000
 
-    X_c = np.random.normal(0, 1, (n_c, d_s))
-    X_t = np.random.normal(0, 2, (n_c, d_t))
-    X = np.random.normal(0, 1, (n, d_s))
+    X_train = np.random.normal(0, 1, (n, d)).astype(np.float32)
+    Y_train = np.random.normal(0, 2, (n, v)).astype(np.float32)
+    X_test = np.random.normal(0, 1, (m, d)).astype(np.float32)
 
     tps = ThinPlateSpline()
 
-    fit_time = compute_time(tps.fit, 100, X_c, X_t)
-    transform_time = compute_time(tps.transform, 100, X)
+    fit_time = compute_time(tps.fit, 100, X_train, Y_train)
+    transform_time = compute_time(tps.transform, 100, X_test)
 
-    print(f"Control point number: {n_c}")
-    print(f"Transformed point number: {n}")
-    print(f"Source and target space dimension: {d_s} -> {d_t}")
+    print(f"Control point number: {n}")
+    print(f"Transformed point number: {m}")
+    print(f"Source and target space dimension: {d} -> {v}")
     print(f"Fit avg time: {fit_time}")
     print(f"Transform avg time: {transform_time}")
 
