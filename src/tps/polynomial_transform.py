@@ -1,13 +1,18 @@
-"""Polynomial transform adapted from scikit-learn"""
+"""Polynomial transform adapted from scikit-learn."""
+
+from __future__ import annotations
 
 from itertools import chain, combinations_with_replacement
-from typing import Iterable, Tuple
+from typing import TYPE_CHECKING
 
 import numpy as np
 
+if TYPE_CHECKING:
+    from collections.abc import Iterable
+
 
 class PolynomialFeatures:
-    """Generate polynomial features
+    """Generate polynomial features.
 
     For each feature vector, it generates polynomial features of degree d consisting
     of all polynomial combinations of the features with degree less than or equal to
@@ -28,7 +33,7 @@ class PolynomialFeatures:
         self.n_output_features = 0
 
     @staticmethod
-    def _combinations(n_features: int, degree: int) -> Iterable[Tuple[int, ...]]:
+    def _combinations(n_features: int, degree: int) -> Iterable[tuple[int, ...]]:
         return chain.from_iterable(combinations_with_replacement(range(n_features), i) for i in range(degree + 1))
 
     @staticmethod
@@ -36,7 +41,7 @@ class PolynomialFeatures:
         # TODO: Can be computed mathematically
         return sum(1 for _ in PolynomialFeatures._combinations(n_features, degree))
 
-    def fit(self, X: np.ndarray):
+    def fit(self, X: np.ndarray) -> PolynomialFeatures:
         """Compute number of output features."""
         _, n_features = X.shape
         self.n_input_features = n_features
@@ -44,18 +49,19 @@ class PolynomialFeatures:
         self._fitted = True
         return self
 
-    def transform(self, X: np.ndarray):
-        """Transform features to polynomial features
+    def transform(self, X: np.ndarray) -> np.ndarray:
+        """Transform features to polynomial features.
 
         Args:
             X (np.ndarray): Features for multiple samples
                 Shape: (n_samples, n_features)
 
-        Returns
+        Returns:
             np.ndarrray: Polynomial features
                 Shape: (n_samples, n_output_features)
         """
-        assert self._fitted, "Please first fit the PolynomialFeatures"
+        if not self._fitted:
+            raise RuntimeError("Please call `fit` before `transform`.")
 
         n_samples, n_features = X.shape
 

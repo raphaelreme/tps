@@ -1,10 +1,105 @@
 [build-system]
-requires = [
-    "setuptools>=46.4.0",
-    "wheel"
+requires = ["uv_build>=0.9.7,<0.10.0"]
+build-backend = "uv_build"
+
+[project]
+name = "thin-plate-spline"
+version = "1.2.0"
+description = "Thin Plate Spline and Polyharmonic Spline implementation with numpy/scipy"
+readme = "README.md"
+authors = [
+    { name = "Raphael Reme", email = "raphaelreme-dev@protonmail.com" }
 ]
-build-backend = "setuptools.build_meta"
+maintainers = [
+    { name = "Raphael Reme", email = "raphaelreme-dev@protonmail.com" }
+]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["Interpolation", "Numpy", "Machine Learning"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "scipy",
+]
+
+[dependency-groups]
+dev = [
+    "matplotlib",
+    "mypy",
+    "prek",
+    "ruff",
+    "tqdm",
+]
 
 
-[tool.black]
+[project.urls]
+Homepage = "https://github.com/raphaelreme/tps"
+Documentation = "https://github.com/raphaelreme/tps"
+Repository = "https://github.com/raphaelreme/tps"
+Issues = "https://github.com/raphaelreme/tps/issues"
+
+
+[tool.uv]
+
+build-backend.module-name = "tps"
+python-preference = "only-managed"
+
+
+[tool.ruff]
 line-length=120
+indent-width = 4
+
+
+# Format
+format.docstring-code-format = true
+format.indent-style = "space"
+format.quote-style = "double"
+format.line-ending = "lf"
+format.skip-magic-trailing-comma = false
+
+# Lint
+lint.select = ["ALL"]
+
+lint.ignore = [
+    "ANN001",  # Checked by mypy which allows default args not to be typed
+    "COM812",  # Recommended by ruff as we use the formatter
+    "D100",  # Module docstring
+    "D107",  # __init__ docstring
+    "EM", "TRY003",  # Let's rely on standard exceptions
+    "FBT",  # Ignore boolean trap
+    "FIX", "TD",  # Ignore TODO, FIXME, XXX
+]
+
+
+lint.future-annotations = true
+lint.flake8-annotations.ignore-fully-untyped = true
+lint.flake8-annotations.mypy-init-return = true
+lint.pep8-naming.ignore-names = [
+    "i",
+    "j",
+    "k",
+    "n",
+    "t",
+    "X*",
+    "Y*",
+    "A",
+    "B",
+]
+lint.pydocstyle.convention = "google"
+
+
+[tool.mypy]
+enable_error_code = ["ignore-without-code"]
+check_untyped_defs = true
