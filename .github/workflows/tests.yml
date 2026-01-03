@@ -38,7 +38,5 @@ jobs:
         run: uv run mypy src/
       - name: Format checking (ruff)
         run: uv run ruff format --check
-      # TODO
-      # - name: pytest
-      #   run: |
-      #     pytest
+      - name: pytest
+        run: uv run pytest --cov

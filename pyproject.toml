@@ -39,6 +39,8 @@ dev = [
     "matplotlib",
     "mypy",
     "prek",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
     "ruff",
     "tqdm",
 ]
@@ -99,7 +101,14 @@ lint.pep8-naming.ignore-names = [
 ]
 lint.pydocstyle.convention = "google"
 
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["INP001", "D103", "S101", "ANN201", "SLF001", "T201"]
+"example/*.py" = ["INP001", "D103", "S101", "ANN201", "SLF001", "T201", "NPY002", "ERA001"]
+
 
 [tool.mypy]
 enable_error_code = ["ignore-without-code"]
 check_untyped_defs = true
+
+[tool.pytest.ini_options]
+strict = true

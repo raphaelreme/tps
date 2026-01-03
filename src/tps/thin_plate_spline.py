@@ -36,8 +36,9 @@ class ThinPlateSpline:
     or
     G(r) = r**(2 * order - d) for odd dimension d
 
-    For TPS, this sets G(r) = r**2 log(r)
-    As RBF, are not always defined in r = 0 (if 2 * order \le d), we decided to use the common
+    For TPS, this sets G(r) = r**2 log(r).
+
+    If 2 * order \le d, the RBF is not defined at r = 0. In such cases, we use the common
     (but incorrect) TPS kernel instead of the mathematical one.
 
     Fitting the spline, amounts at finding the polynoms coefficients and the weights (w_i).
@@ -176,7 +177,7 @@ class ThinPlateSpline:
         X = _ensure_2d(X)
         if X.shape[1] != self.control_points.shape[1]:
             raise ValueError(
-                f"The number of features do not match training data ({X.shape[1]} != {self.control_points.shape[2]})"
+                f"The number of features do not match training data ({X.shape[1]} != {self.control_points.shape[1]})"
             )
 
         # Compute radial distances

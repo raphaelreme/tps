@@ -1,8 +1,8 @@
 import time
 
-import matplotlib.pyplot as plt  # type: ignore
+import matplotlib.pyplot as plt  # type: ignore[import-untyped]
 import numpy as np
-import tqdm  # type: ignore
+import tqdm  # type: ignore[import-untyped]
 
 from tps import ThinPlateSpline
 
@@ -18,7 +18,7 @@ def compute_time(f, n, *args, **kwargs):
 
 
 def main_timed():
-    """Check time execution
+    """Check time execution.
 
     Also shows d_s != d_t and the usage of float32 to speed up computations.
     """
@@ -44,7 +44,7 @@ def main_timed():
 
 
 def main_interpolation():
-    """Interpolates a function
+    """Interpolates a function.
 
     Inspired from:
     https://scikit-learn.org/stable/auto_examples/linear_model/plot_polynomial_interpolation.html
@@ -72,7 +72,7 @@ def main_interpolation():
 
 
 def main_surface_mapping():
-    """Maps two surfaces
+    """Maps two surfaces.
 
     Inspired from https://github.com/tzing/tps-deformation
     """
