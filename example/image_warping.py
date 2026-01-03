@@ -1,13 +1,13 @@
-import matplotlib.pyplot as plt  # type: ignore
+import matplotlib.pyplot as plt  # type: ignore[import-untyped]
 import numpy as np
-from PIL import Image, ImageDraw  # type: ignore
-import scipy.ndimage  # type: ignore
+import scipy.ndimage  # type: ignore[import-untyped]
+from PIL import Image, ImageDraw  # type: ignore[import-untyped]
 
 from tps import ThinPlateSpline
 
 
 def increase_ctrl_points():
-    """Generate ctrl points that increase the center of the image
+    """Generate ctrl points that increase the center of the image.
 
     (In proportion of the desired shapes)
     """
@@ -42,7 +42,7 @@ def increase_ctrl_points():
 
 
 def decrease_ctrl_points():
-    """Generate ctrl points that decrease the center of the image
+    """Generate ctrl points that decrease the center of the image.
 
     (In proportion of the desired shapes)
     """
@@ -77,7 +77,7 @@ def decrease_ctrl_points():
 
 
 def random_ctrl_points():
-    """Generate random ctrl points
+    """Generate random ctrl points.
 
     (In proportion of the desired shapes)
     """
@@ -98,8 +98,7 @@ def random_ctrl_points():
 
 
 def main():
-    """Warp an image"""
-
+    """Warp an image."""
     # Load the image and draw a rectangle in the middle
     image = Image.open("images/dog.jpeg")
     width, height = image.size

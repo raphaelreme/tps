@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from itertools import chain, combinations_with_replacement
 from typing import TYPE_CHECKING
 
@@ -38,8 +39,8 @@ class PolynomialFeatures:
 
     @staticmethod
     def _combinations_length(n_features: int, degree: int) -> int:
-        # TODO: Can be computed mathematically
-        return sum(1 for _ in PolynomialFeatures._combinations(n_features, degree))
+        # sum_{i=0}^deg comb(n_feat + i - 1, i)
+        return math.comb(n_features + degree, degree)
 
     def fit(self, X: np.ndarray) -> PolynomialFeatures:
         """Compute number of output features."""
