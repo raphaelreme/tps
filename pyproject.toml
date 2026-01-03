@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "thin-plate-spline"
-version = "1.2.0"
+version = "1.2.1"
 description = "Thin Plate Spline and Polyharmonic Spline implementation with numpy/scipy"
 readme = "README.md"
 authors = [

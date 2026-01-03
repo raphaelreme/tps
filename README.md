@@ -25,6 +25,15 @@ For a faster implementation in PyTorch, see [torch-tps](https://github.com/rapha
 $ pip install thin-plate-spline
 ```
 
+
+### From source
+
+```bash
+git clone git@github.com:raphaelreme/tps.git  # OR https://github.com/raphaelreme/tps.git
+cd tps
+pip install .
+```
+
 ## Getting started
 
 ```python
@@ -121,14 +130,6 @@ Applies the learned mapping to new input points.
 - **X**: `(n', d)` points
 
 Returns: `(n', v)` interpolated values
-
-## Development
-
-```bash
-git clone https://github.com/raphaelreme/tps.git
-cd tps
-pip install -e .
-```
 
 ## License
 
