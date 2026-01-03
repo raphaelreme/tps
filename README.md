@@ -1,5 +1,10 @@
 # Thin Plate Spline (TPS)
 
+[![License](https://img.shields.io/github/license/raphaelreme/tps)](https://github.com/raphaelreme/tps/raw/main/LICENSE)
+[![PyPi](https://img.shields.io/pypi/v/thin-plate-spline)](https://pypi.org/project/thin-plate-spline/)
+[![Python](https://img.shields.io/pypi/pyversions/thin-plate-spline)](https://pypi.org/project/thin-plate-spline/)
+[![Downloads](https://img.shields.io/pypi/dm/thin-plate-spline)](https://pypi.org/project/thin-plate-spline/)
+[![Codecov](https://codecov.io/github/raphaelreme/tps/graph/badge.svg?token=9124FUY5R5)](https://codecov.io/github/raphaelreme/tps)
 [![Lint and Test](https://github.com/raphaelreme/tps/actions/workflows/tests.yml/badge.svg)](https://github.com/raphaelreme/tps/actions/workflows/tests.yml)
 
 Python (NumPy & SciPy) implementation of the generalized Polyharmonic Spline interpolation (also known as Thin Plate Spline in 2D). It learns a smooth elastic mapping between two Euclidean spaces with support for:
