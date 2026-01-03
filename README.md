@@ -33,7 +33,7 @@ Y_train = np.random.normal(0, 1, (800, 2))  # Values for each point (800 values 
 # New source points to interpolate
 X_test = np.random.normal(0, 1, (300 0, 3))
 
-# Initialize spline model (Regularization is controled with alpha parameter)
+# Initialize spline model (Regularization is controlled with alpha parameter)
 tps = ThinPlateSpline(alpha=0.5)
 
 # Fit spline from control points

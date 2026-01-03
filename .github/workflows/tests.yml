@@ -33,9 +33,13 @@ jobs:
       - name: Install the project
         run: uv sync --locked --all-extras --dev
       - name: Linting (ruff)
-        run: uv run ruff check src/
+        run: uv run ruff check
       - name: Type checking (mypy)
-        run: uv run mypy src/
+        run: uv run mypy .
+      - name: prek
+        uses: j178/prek-action@v1
+        with:
+          extra_args: --all-files --skip ruff-check --skip ruff-format
       - name: Format checking (ruff)
         run: uv run ruff format --check
       - name: pytest
