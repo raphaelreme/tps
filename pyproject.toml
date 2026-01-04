@@ -39,10 +39,11 @@ dev = [
     "matplotlib",
     "mypy",
     "prek",
-    "pytest>=8.4.2",
-    "pytest-cov>=7.0.0",
+    "pytest",
+    "pytest-cov",
     "ruff",
     "tqdm",
+    "types-tqdm",
 ]
 
 
@@ -60,7 +61,7 @@ python-preference = "only-managed"
 
 
 [tool.ruff]
-line-length=120
+line-length = 120
 indent-width = 4
 
 

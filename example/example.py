@@ -2,7 +2,7 @@ import time
 
 import matplotlib.pyplot as plt  # type: ignore[import-untyped]
 import numpy as np
-import tqdm  # type: ignore[import-untyped]
+import tqdm
 
 from tps import ThinPlateSpline
 
