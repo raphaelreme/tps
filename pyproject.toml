@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "thin-plate-spline"
-version = "1.2.1"
+version = "1.2.2"
 description = "Thin Plate Spline and Polyharmonic Spline implementation with numpy/scipy"
 readme = "README.md"
 authors = [
@@ -21,14 +21,14 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "numpy",
     "scipy",
